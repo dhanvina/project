@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Department List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Department Number</th>
+        <th>Department Name</th>
+        <th>HOD Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for department in departments %}
+        <tr>
+          <td>{{ department.department_number }}</td>
+          <td>{{ department.department_name }}</td>
+          <td>{{ department.hod_name }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="3">No departments found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
