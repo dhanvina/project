@@ -44,3 +44,4 @@ class EquipmentIssue(models.Model):
 
     def __str__(self):
         return f"{self.lab}, {self.experiment}"
+
