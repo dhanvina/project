@@ -15,8 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework import routers
+from cse_lab import views
+
+router = routers.DefaultRouter()
+router.register(r'Departments',views.DepartmentView, 'Department')
+
+router.register(r'Labs',views.LabView, 'Lab')
+
+router.register(r'PurchaseOrders',views.PurchaseOrderView, 'PurchaseOrder')
+
+router.register(r'Equipments',views.EquipmentView, 'Equipment')
+
+router.register(r'EquipmentIssues',views.EquipmentIssueView, 'EquipmentIssue')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('cse_lab.urls'))
+    path('api/',include(router.urls))
 ]
