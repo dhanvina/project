@@ -1,8 +1,7 @@
-"""
-URL configuration for backend project.
+"""lab_recorder URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,8 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from rest_framework import routers
+from cse_lab import views
+
+router = routers.DefaultRouter()
+router.register(r'Departments',views.DepartmentView, 'Department')
+
+router.register(r'Labs',views.LabView, 'Lab')
+
+router.register(r'PurchaseOrders',views.PurchaseOrderView, 'PurchaseOrder')
+
+router.register(r'Equipments',views.EquipmentView, 'Equipment')
+
+router.register(r'EquipmentIssues',views.EquipmentIssueView, 'EquipmentIssue')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/',include(router.urls))
 ]
