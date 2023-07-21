@@ -45,3 +45,15 @@ class EquipmentIssue(models.Model):
     def __str__(self):
         return f"{self.lab}, {self.experiment}"
 
+
+
+class EquipmentReview(models.Model):
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    date = models.DateField()
+    lab_incharge_name = models.CharField(max_length=100)
+    not_working_quantity = models.IntegerField()
+    remarks = models.TextField()
+
+    def __str__(self):
+        return f"{self.equipment}, {self.date}"
