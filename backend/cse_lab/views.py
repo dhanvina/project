@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .serializers import DepartmentSerializer,LabSerializer, PurchaseOrderSerializer, EquipmentSerializer, EquipmentIssueSerializer
+from .serializers import DepartmentSerializer,LabSerializer, PurchaseOrderSerializer, EquipmentSerializer, EquipmentIssueSerializer, EquipmentReviewSerializer
 from rest_framework import viewsets
-from .models import Department, Lab, PurchaseOrder,  Equipment, EquipmentIssue
+from .models import Department, Lab, PurchaseOrder,  Equipment, EquipmentIssue, EquipmentReview
 
 
 class DepartmentView(viewsets.ModelViewSet):
@@ -23,6 +23,10 @@ class EquipmentView(viewsets.ModelViewSet):
 class EquipmentIssueView(viewsets.ModelViewSet):
     serializer_class = EquipmentIssueSerializer
     queryset = EquipmentIssue.objects.all()
+
+class EquipmentReviewView(viewsets.ModelViewSet):
+    serializer_class = EquipmentReviewSerializer
+    queryset = EquipmentReview.objects.all()
 
 
 
