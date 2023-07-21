@@ -8,16 +8,24 @@ import Issue from "./Issues";
 import Header from "./Components/Header";
 import Recieved from "./Recieved";
 import Home from "./Home";
+import Purchase from "./PurchaseOrderForm";
+import Ok from "./DepartmentForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
     return (
         <div className="App">
             <ToastContainer />
             <BrowserRouter>
                 <Header />
-<Home/>
+                <Home />
                 <Routes>
                     <Route path="/issue" element={<Issue />} />
+                    {/* <Route path="/pur" element={<Purchase />} /> */}
+                    <Route path="/ok" element={<Ok />} />
+                    <Route path="/recieve" element={<Recieved />} />
+                    <Route path="/recieve" element={<Recieved />} />
+
                     <Route path="/recieve" element={<Recieved />} />
                 </Routes>
             </BrowserRouter>
