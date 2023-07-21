@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Department, Lab, PurchaseOrder, Equipment, EquipmentIssue
+from .models import Department, Lab, PurchaseOrder, Equipment, EquipmentIssue, EquipmentReview
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,8 @@ class EquipmentIssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = EquipmentIssue
         fields = ('id','experiment','lab','number_of_equipments','details')
+
+class EquipmentReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EquipmentReview
+        fields = ('id','equipment','quantity','date','lab_incharge_name','not_working_quantity','remarks')

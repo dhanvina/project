@@ -29,6 +29,8 @@ router.register(r'Equipments',views.EquipmentView, 'Equipment')
 
 router.register(r'EquipmentIssues',views.EquipmentIssueView, 'EquipmentIssue')
 
+router.register(r'EquipmentReview',views.EquipmentReviewView, 'EquipmentReview')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls))
