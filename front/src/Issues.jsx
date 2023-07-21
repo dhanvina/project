@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Issue() {
+    const navigate = useNavigate();
     const [data, setData] = useState({
         experiment: "",
         lab: "",
@@ -17,7 +19,6 @@ function Issue() {
         }));
     }
     async function onSubmit(e) {
-        console.log(data);
         e.preventDefault();
         try {
             const response = await axios.post("http://localhost:8000/api/EquipmentIssues/", data, {
@@ -25,6 +26,8 @@ function Issue() {
                     "Content-Type": "application/json",
                 },
             });
+            console.log(response);
+            // navigate("/");
         } catch (error) {
             console.log(error);
         }
