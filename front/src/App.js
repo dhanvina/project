@@ -15,11 +15,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
     return (
         <div className="App">
-            <ToastContainer />
+            <ToastContainer position="bottom-center" theme="dark" />
             <BrowserRouter>
                 <Header />
-                <Home />
                 <Routes>
+                    <Route path="/" element={<Home />} />
                     <Route path="/issue" element={<Issue />} />
                     {/* <Route path="/pur" element={<Purchase />} /> */}
                     <Route path="/ok" element={<Ok />} />
