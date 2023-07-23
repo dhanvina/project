@@ -9,6 +9,7 @@ import DepartmentList from "./DepartmentForm";
 import EquipmentDetailsForm from "./EquipmentDetailsForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LabInformation from "./LabInformationForm";
+import Profile from "./Profile";
 function App() {
     return (
         <div className="App">
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/equipments" element={<EquipmentDetailsForm />} />
                     <Route path="/purchase" element={<Purchase />} />
                     <Route path="/lab" element={<LabInformation />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </BrowserRouter>
         </div>

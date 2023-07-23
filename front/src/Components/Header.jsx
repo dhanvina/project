@@ -14,16 +14,16 @@ export default function Head() {
 
     return (
         <>
-            <div className="pb-6 sticky z-30 w-full bg-slate-50 shadow-xl h-14 ">
+            <div className="pb-6 sticky z-30 w-full bg-slate-50 shadow-xl h-16 ">
                 <img onClick={() => nav("/")} src={require("../img/GAT-logo.png")} alt="college logo" className="w-12 cursor-pointer absolute ml-9 my-1 mr-4" />
 
-                <div className="absolute z-50 top-2 right-6">
-                    <button className="absolute items-center right-16 w-18 px-4 py-2  font-semibold text-black bg-white hover:text-gray-700 hover:border-b-4 border-blue-600 transition ease-in-out duration-200" onClick={toggleDropdown}>
+                <div className="absolute z-50 top-3 right-16 mr-2 flex flex-col w-[150px] justify-center items-center ">
+                    <button className="top-0 right-0   w-[85%] px-4 py-2  font-semibold text-black bg-slate-50 hover:text-gray-700 hover:border-b-4 border-b-blue-500 transition ease-in-out duration-200" onClick={toggleDropdown}>
                         DropDown
                     </button>
 
                     {isOpen && (
-                        <div className="duration-150 transition ease-in-out relative  right-16 top-10 w-18 py-2 mt-3 bg-white shadow-lg rounded-lg ">
+                        <div className="duration-150 transition ease-in-out relative w-full top-3    py-2 mt-3 bg-white shadow-lg rounded-lg ">
                             <button
                                 onClick={() => {
                                     navi("/issue");
@@ -76,7 +76,12 @@ export default function Head() {
                     )}
                 </div>
 
-                <CgProfile className="absolute right-0 w-10 pr-3 mr-8 h-full" />
+                <CgProfile
+                    onClick={() => {
+                        nav("/profile");
+                    }}
+                    className="absolute right-0 w-10 pr-3 mr-8 h-full cursor-pointer"
+                />
             </div>
         </>
     );
