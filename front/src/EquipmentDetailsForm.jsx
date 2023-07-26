@@ -28,7 +28,7 @@ function EquipmentsDetails() {
         if (e.target.files) {
             setData((prev) => ({
                 ...prev,
-                [e.target.id]: e.target.files[0].name,
+                [e.target.id]: e.target.files,
             }));
         }
         setData((prev) => ({

@@ -32,14 +32,14 @@ export default function Head() {
                             >
                                 Issues
                             </button>
-                            <button
-                                onClick={() => {
-                                    navi("/recieve");
-                                }}
-                                className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
-                                Recieved
-                            </button>
+                            {/* <button */}
+                            {/*     onClick={() => { */}
+                            {/*         navi("/recieve"); */}
+                            {/*     }} */}
+                            {/*     className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200" */}
+                            {/* > */}
+                            {/*     Recieved */}
+                            {/* </button> */}
                             <button
                                 onClick={() => {
                                     navi("/departmentlist");
