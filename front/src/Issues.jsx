@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Button from "./Components/Button";
 function Issue() {
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -27,21 +29,23 @@ function Issue() {
                 },
             });
             console.log(response);
-            // navigate("/");
+            toast.success("Details Recorded");
+            navigate("/");
         } catch (error) {
-            console.log(error);
+            toast.dismiss();
+            toast.error("Enter the Correct Details");
         }
     }
 
     return (
-        <div className="h-screen  bg-blue-100 w-full flex px-3 flex-col  items-center justify-center">
-            <h1 className="font-bold text-3xl pt-28">Equipment Issues</h1>
-            <form className="max-w-2xl m-auto flex flex-col  w-full justify-center items-center " onSubmit={onSubmit}>
-                <input type="text" placeholder="Experiment" value={experiment} className="border border-black w-full rounded transition ease-in-out py-3 mb-2 px-2" id="experiment" onChange={onChange} />
-                <input type="text" onChange={onChange} value={lab} id="lab" placeholder="lab" className="border border-black w-full rounded transition ease-in-out py-3 mb-2 px-2" />
-                <input type="text" id="number_of_equipments" placeholder="Number of Equipments" onChange={onChange} value={number_of_equipments} className="border border-black w-full rounded transition ease-in-out py-3 mb-2 px-2" />
-                <textarea minLength="10" rows="2" onChange={onChange} value={details} id="details" className="border border-black w-full rounded transition ease-in-out py-3 mb-2 px-2" placeholder="Details"></textarea>
-                <button className="bg-blue-600 py-2 w-[50%] text-white font-semibold shadow hover:shadow-lg hover:bg-blue-700 active:bg-blue-800 transition ease-in-out">Submit</button>
+        <div className="my-3 px-4 ">
+            <h1 className="font-bold text-center  text-3xl py-10">Equipment Issues</h1>
+            <form className="max-w-lg mx-auto flex flex-col  w-full justify-center items-center " onSubmit={onSubmit}>
+                <input type="text" placeholder="Experiment Name" value={experiment} className=" border border-gray-300 w-full rounded-md transition ease-in-out py-3 mb-4 px-2" id="experiment" onChange={onChange} />
+                <input type="text" onChange={onChange} value={lab} id="lab" placeholder="Lab Name" className="border border-gray-300 w-full rounded-md transition ease-in-out py-3 mb-4 px-2" />
+                <input type="text" id="number_of_equipments" placeholder="Number of Equipments" onChange={onChange} value={number_of_equipments} className="border border-gray-300 w-full rounded-md transition ease-in-out py-3 mb-4 px-2" />
+                <textarea minLength="10" rows="2" onChange={onChange} value={details} id="details" className="border border-gray-300 w-full rounded-md transition ease-in-out py-3 mb-4 px-2" placeholder="Details"></textarea>
+                <Button />
             </form>
         </div>
     );
