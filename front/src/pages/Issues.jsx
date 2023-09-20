@@ -1,8 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Button from "./Components/Button";
+import Button from "../Components/Button";
 function Issue() {
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -23,10 +22,12 @@ function Issue() {
     async function onSubmit(e) {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8000/api/EquipmentIssues/", data, {
+            const response = await fetch("http://localhost:8000/api/EquipmentIssues/", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify(data),
             });
             console.log(response);
             toast.success("Details Recorded");

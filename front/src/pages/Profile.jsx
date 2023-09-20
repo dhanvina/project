@@ -27,7 +27,7 @@ export default function Profile() {
     return (
         <div>
             <div className="flex flex-col flex-wrap items-center justify-center max-w-6xl mx-auto ">
-                <div className="my-6 text-3xl font-bold text-center ">Admin Profile</div>
+                <div className="my-6 text-3xl font-bold text-center ">User Profile</div>
                 <form className="w-[95%] m-auto  md:w-[50%] ">
                     <input type="text" disabled={!editable} placeholder="Name" id="name" value={name} className={` w-full p-3 my-4 text-xl rounded transition ease-in-out border border-gray-400 bg-white text-gray-700 ${editable && "bg-rose-300 text-black"} `} onChange={infoEdit} />
                     <input type="text" value={email} id="email" placeholder="Email" className={`w-full p-3 my-4 text-xl rounded transition ease-in-out border-gray-400 bg-white `} disabled />
@@ -37,7 +37,6 @@ export default function Profile() {
                             <span
                                 className="text-blue-600 cursor-pointer transition ease-in-out duration-100 hover:text-blue-800"
                                 onClick={() => {
-                                    editable && onSubmit(); //writing this before becuase if editable is true then we submit just before it becomes false
                                     //as the user clicks on apply changes
                                     setEditable(!editable);
                                 }}

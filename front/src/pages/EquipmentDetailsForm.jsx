@@ -1,8 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Button from "./Components/Button";
+import Button from "../Components/Button";
 function EquipmentsDetails() {
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -40,13 +39,15 @@ function EquipmentsDetails() {
         console.log(data);
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8000/api/Equipments/", data, {
+            let response = await fetch("http://localhost:8000/api/Equipments/", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify(data),
             });
+            response = response.json();
             console.log(response);
-
             toast.success("Equipment Details Recorded");
             navigate("/");
         } catch (error) {
@@ -57,10 +58,10 @@ function EquipmentsDetails() {
 
     return (
         <>
-            <form onSubmit={onSubmit} className="px-4 pb-5 ">
+            <form onSubmit={onSubmit} className="px-4 pb-5 " encType="multipart/form-data">
                 <p className="text-3xl font-bold text-center lg:py-20 py-14 ">Equipment Details</p>
                 <main className="flex flex-col flex-wrap items-center justify-center w-full h-full max-w-6xl px-5 mx-auto mt-3 md:px-2">
-                    <img src={require("./img/animatedImage.jpg")} alt="Lab" className=" rounded-xl w-[90%] md:w-[68%] lg:w-[50%] mb-10 " />
+                    <img src={require("../img/animatedImage.jpg")} alt="Lab" className=" rounded-xl w-[90%] md:w-[68%] lg:w-[50%] mb-10 " />
                     <div className="w-[90%] md:w-[68%]  lg:w-[50%]">
                         <input type="text" required id="equipment_serial_number" placeholder="Equipment Serial Number" value={equipment_serial_number} onChange={onChange} className="w-full py-3 pl-2 my-6 text-lg border border-gray-300 rounded-md " />
                         <input type="text" required id="purchase_order" placeholder="Purchase Order Number" value={purchase_order} onChange={onChange} className="w-full py-3 pl-2 my-6 text-lg border border-gray-300 rounded-md " />

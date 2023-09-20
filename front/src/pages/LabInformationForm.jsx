@@ -1,8 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Button from "./Components/Button";
+import Button from "../Components/Button";
 function LabInformation() {
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -21,15 +20,16 @@ function LabInformation() {
         }));
     }
     async function onSubmit(e) {
-        console.log(data);
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8000/api/Labs/", data, {
+            const response = await fetch("http://localhost:8000/api/Labs/", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify(data),
             });
-            console.log(response);
+
             toast.success("Lab Information Recorded");
             navigate("/");
         } catch (error) {
@@ -43,7 +43,7 @@ function LabInformation() {
             <form onSubmit={onSubmit} className="pb-5 px-4">
                 <p className="text-center font-bold text-3xl lg:py-20  py-14 ">Lab Information</p>
                 <main className="w-full flex h-full justify-center lg:space-x-[10%] items-center mt-3 flex-wrap mx-auto max-w-6xl md:px-2 px-5">
-                    <img src={require("./img/animatedImage.jpg")} alt="Lab" className=" rounded-xl w-[90%] md:w-[68%] lg:w-[50%] mb-6 lg:mb-0" />
+                    <img src={require("../img/animatedImage.jpg")} alt="Lab" className=" rounded-xl w-[90%] md:w-[68%] lg:w-[50%] mb-6 lg:mb-0" />
                     <div className="w-[90%] md:w-[68%]  lg:w-[40%]">
                         <input required type="text" id="lab_number" placeholder="Lab Number" value={lab_number} onChange={onChange} className="w-full py-3 pl-2 my-6 text-lg rounded-md border border-gray-300 " />
                         <input type="text" required id="department" value={department} placeholder="Department Number" onChange={onChange} className="w-full py-3 pl-2 my-6 text-lg transition ease-in-out rounded-md border-gray-300" />

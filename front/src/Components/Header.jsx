@@ -1,88 +1,95 @@
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { BsChevronDown } from "react-icons/bs";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-export default function Head() {
-    const [isOpen, setIsOpen] = useState(false);
-    const nav = useNavigate();
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-    function navi(loc) {
-        nav(loc);
-        setIsOpen(!isOpen);
-    }
+import Dashboard from "../pages/Dashboard";
+function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+}
 
+export default function Head() {
+    const nav = useNavigate();
     return (
         <>
-            <div className="pb-6 sticky z-30 w-full bg-slate-50 shadow-xl h-16 ">
-                <img onClick={() => nav("/")} src={require("../img/GAT-logo.png")} alt="college logo" className="w-12 cursor-pointer absolute ml-9 my-1 mr-4" />
-
-                <div className="absolute z-50 top-3 right-16 mr-2 flex flex-col w-[150px] justify-center items-center ">
-                    <button className="top-0 right-0   w-[85%] px-4 py-2  font-semibold text-black bg-slate-50 hover:text-gray-700 hover:border-b-4 border-b-blue-500 transition ease-in-out duration-200" onClick={toggleDropdown}>
-                        DropDown
+            <div className="space-x-3 py-2 sticky z-30 flex justify-between items-center w-full bg-slate-50 shadow-lg  ">
+                <div className="flex gap-16 font-semibold ">
+                    <img onClick={() => nav("/")} src={require("../img/GAT-logo.png")} alt="college logo" className="w-12 cursor-pointer ml-9 " />
+                    <button className="hover:shadow-md px-3 rounded-md hover:bg-blue-400 hover:text-white transition ease-in-out" onClick={() => nav("/dashboard")}>
+                        Dashboard
                     </button>
-
-                    {isOpen && (
-                        <div className="duration-150 transition ease-in-out relative w-full top-3    py-2 mt-3 bg-white shadow-lg rounded-lg ">
-                            <button
-                                onClick={() => {
-                                    navi("/issue");
-                                }}
-                                className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
-                                Issues
-                            </button>
-                            {/* <button */}
-                            {/*     onClick={() => { */}
-                            {/*         navi("/recieve"); */}
-                            {/*     }} */}
-                            {/*     className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200" */}
-                            {/* > */}
-                            {/*     Recieved */}
-                            {/* </button> */}
-                            <button
-                                onClick={() => {
-                                    navi("/departmentlist");
-                                }}
-                                className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
-                                Department List
-                            </button>
-                            <button
-                                onClick={() => {
-                                    navi("/equipments");
-                                }}
-                                className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
-                                Equipment Details
-                            </button>
-                            <button
-                                onClick={() => {
-                                    navi("/purchase");
-                                }}
-                                className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
-                                Purchase Order
-                            </button>
-                            <button
-                                onClick={() => {
-                                    navi("/lab");
-                                }}
-                                className="transition ease-in-out text-center w-full block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
-                                Lab Info
-                            </button>
-                        </div>
-                    )}
                 </div>
-
-                <CgProfile
-                    onClick={() => {
-                        nav("/profile");
-                    }}
-                    className="absolute right-0 w-10 pr-3 mr-8 h-full cursor-pointer"
-                />
+                <div className="flex items-center gap-5">
+                    <DropDown />
+                    <CgProfile
+                        onClick={() => {
+                            nav("/profile");
+                        }}
+                        className="text-3xl mr-5 cursor-pointer"
+                    />
+                </div>
             </div>
         </>
+    );
+}
+
+export function DropDown() {
+    const nav = useNavigate();
+    return (
+        <Menu as="div" className=" relative inline-block text-left">
+            <div>
+                <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  hover:bg-gray-50">
+                    Details <BsChevronDown className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                </Menu.Button>
+            </div>
+
+            <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
+                <Menu.Items className="absolute right-0 z-10 mt-5 w-36  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1 ">
+                        <Menu.Item>
+                            {({ active }) => (
+                                <button onClick={() => nav("/issue")} className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm w-full")}>
+                                    Issues
+                                </button>
+                            )}
+                        </Menu.Item>
+                        <Menu.Item>
+                            {({ active }) => (
+                                <button onClick={() => nav("/departmentlist")} className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm w-full")}>
+                                    {" "}
+                                    Department List
+                                </button>
+                            )}
+                        </Menu.Item>
+                        <Menu.Item>
+                            {({ active }) => (
+                                <button onClick={() => nav("/purchase")} className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm w-full")}>
+                                    {" "}
+                                    Purchase Order
+                                </button>
+                            )}
+                        </Menu.Item>
+                        <Menu.Item>
+                            {({ active }) => (
+                                <button onClick={() => nav("/lab")} className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm w-full")}>
+                                    {" "}
+                                    Lab Info
+                                </button>
+                            )}
+                        </Menu.Item>
+
+                        <Menu.Item>
+                            {({ active }) => (
+                                <button onClick={() => nav("/equipments")} className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm w-full")}>
+                                    {" "}
+                                    Equipments Details
+                                </button>
+                            )}
+                        </Menu.Item>
+                    </div>
+                </Menu.Items>
+            </Transition>
+        </Menu>
     );
 }
