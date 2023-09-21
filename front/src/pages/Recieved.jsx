@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 function Recieved() {
@@ -22,12 +21,6 @@ function Recieved() {
     async function onSubmit(e) {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8000/api/EquipmentIssues/", data, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            console.log(response);
             toast.success("Details Recorded");
             navigate("/");
         } catch (error) {
@@ -38,16 +31,16 @@ function Recieved() {
 
     return (
         <div className="px-3 py-3">
-            <h1 className="font-bold text-center text-3xl py-8">Equipment Recieved</h1>
-            <div className="h-full max-w-lg mx-auto w-full flex flex-col px-3 items-center justify-center">
+            <h1 className="py-8 text-3xl font-bold text-center">Equipment Recieved</h1>
+            <div className="flex flex-col items-center justify-center w-full h-full max-w-lg px-3 mx-auto">
                 <form className="max-w-[45rem] m-auto flex flex-col  w-full justify-center items-center ">
-                    <input type="text" required placeholder="Equipment" className="border border-gray-300 w-full rounded transition ease-in-out py-3 mb-4 px-2" />
-                    <input type="text" required placeholder="Quantity" className="border border-gray-300 w-full rounded transition ease-in-out py-3 mb-4 px-2" />
-                    <input type="date" required className="border border-gray-300 w-full rounded transition ease-in-out py-3 mb-4 px-2" />
-                    <input type="text" required placeholder="Lab Incharge" className="border border-gray-300 w-full rounded transition ease-in-out py-3 mb-4 px-2" />
-                    <input type="text" placeholder="Not working Equipment Quantity" className="border border-gray-300 w-full rounded transition ease-in-out py-3 mb-4 px-2" />
-                    <textarea minLength="50" rows="2" className="border border-gray-300 w-full rounded transition ease-in-out py-3 mb-4 px-2" placeholder="Remarks"></textarea>
-                    <button className="bg-blue-600 py-2 my-2  text-white font-semibold shadow hover:shadow-lg hover:bg-blue-700 active:bg-blue-800 transition ease-in-out w-full">Save</button>
+                    <input type="text" required placeholder="Equipment" className="w-full px-2 py-3 mb-4 border border-gray-300 rounded transition ease-in-out" />
+                    <input type="text" required placeholder="Quantity" className="w-full px-2 py-3 mb-4 border border-gray-300 rounded transition ease-in-out" />
+                    <input type="date" required className="w-full px-2 py-3 mb-4 border border-gray-300 rounded transition ease-in-out" />
+                    <input type="text" required placeholder="Lab Incharge" className="w-full px-2 py-3 mb-4 border border-gray-300 rounded transition ease-in-out" />
+                    <input type="text" placeholder="Not working Equipment Quantity" className="w-full px-2 py-3 mb-4 border border-gray-300 rounded transition ease-in-out" />
+                    <textarea minLength="50" rows="2" className="w-full px-2 py-3 mb-4 border border-gray-300 rounded transition ease-in-out" placeholder="Remarks"></textarea>
+                    <button className="w-full py-2 my-2 font-semibold text-white bg-blue-600 shadow hover:shadow-lg hover:bg-blue-700 active:bg-blue-800 transition ease-in-out">Save</button>
                 </form>
             </div>
         </div>
