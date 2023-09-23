@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Purchase from "./pages/PurchaseOrderForm";
 import DepartmentList from "./pages/DepartmentForm";
 import EquipmentDetailsForm from "./pages/EquipmentDetailsForm";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import LabInformation from "./pages/LabInformationForm";
 import Profile from "./pages/Profile";
 import Demo from "./Components/DashboardPages/DpList";
@@ -19,6 +19,7 @@ import Login from "./pages/Login";
 import EquipmentsReviewList from "./Components/DashboardPages/EquipmentReviewList";
 import EquipmentsReview from "./pages/EquipmentsReview";
 import Register from "./pages/Register";
+import PrivateRoute from "./Hooks/PrivateRoute";
 function App() {
     return (
         <div className="App">
@@ -26,7 +27,9 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<PrivateRoute />}>
+                        <Route path="/" element={<Home />} />
+                    </Route>
                     <Route path="/issue" element={<Issue />} />
                     <Route path="/departmentlist" element={<DepartmentList />} />
                     <Route path="/equipments" element={<EquipmentDetailsForm />} />

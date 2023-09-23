@@ -6,12 +6,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import Dashboard from "../pages/Dashboard";
 import { useSelector } from "react-redux";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { openPanel } from "../features/auth/sidePanelSlice";
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
 function Head() {
     let pageUrls = ["issue", "departmentlist", "purchase", "lab", "equipments", "review"];
+    let dispatch = useDispatch();
     let user = useSelector((store) => {
         return store.user;
     });
@@ -23,29 +27,39 @@ function Head() {
     } else {
         headerDisplay = true;
     }
-    if (user.role === "admin") {
-        pageUrls = pageUrls.filter((item) => {
-            if (item != "issue" && item != "review") {
-                return true;
-            }
-        });
-    } else if (user.role === "incharge") {
-        pageUrls = pageUrls.filter((item) => {
-            if (item == "issue" || item == "review") return true;
-        });
-    } else {
-        pageUrls = [];
+
+    if (user.status) {
     }
+
+    // if (user.role === "admin") {
+    //     pageUrls = pageUrls.filter((item) => {
+    //         if (item != "issue" && item != "review") {
+    //             return true;
+    //         }
+    //     });
+    // } else if (user.role === "incharge") {
+    //     pageUrls = pageUrls.filter((item) => {
+    //         if (item == "issue" || item == "review") return true;
+    //     });
+    // } else {
+    //     pageUrls = [];
+    // }
     console.log(pageUrls);
     return (
         <>
             {headerDisplay && (
                 <div className="sticky z-50 flex items-center justify-between w-full py-2 shadow-lg space-x-3 bg-slate-50">
+                    {location.pathname != "/" ? (
+                        <button type="button" className="fixed top-5 left-3" onClick={() => dispatch(openPanel())}>
+                            <AiOutlineMenuUnfold />
+                        </button>
+                    ) : (
+                        ""
+                    )}
                     <div className="flex font-semibold gap-16 ">
                         <img onClick={() => nav("/")} src={require("../img/GAT-logo.png")} alt="college logo" className="w-12 cursor-pointer ml-9 " />
-                        <button className="px-3 hover:shadow-md rounded-md hover:bg-blue-400 hover:text-white transition ease-in-out" onClick={() => nav("/dashboard")}>
-                            <span className="capitalize">{user.role}</span>
-                            {"'"}s Dashboard
+                        <button className="px-3 hover:shadow-md rounded-md hover:bg-blue-400 hover:text-white transition ease-in-out" onClick={() => nav("/demo")}>
+                            Dashboard
                         </button>
                     </div>
                     <div className="flex items-center ">

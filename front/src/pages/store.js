@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "../features/userSlice";
+import userReducer from "../features/auth/userSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import sidePanelReducer from "../features/sidePanelSlice";
+import sidePanelReducer from "../features/auth/sidePanelSlice";
 
 const rootReducer = combineReducers({ user: userReducer, sidePanel: sidePanelReducer });
 const persistConfig = {

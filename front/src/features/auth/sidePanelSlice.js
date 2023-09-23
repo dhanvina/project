@@ -14,5 +14,5 @@ const sidePanelSlice = createSlice({
     },
 });
 
-export const { closePanel, openPanel } = sidePanelSlice.actions;
+export const { openPanel } = sidePanelSlice.actions;
 export default sidePanelSlice.reducer;

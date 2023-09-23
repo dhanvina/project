@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import Panel from "../Panel";
 function Lablist() {
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
         async function fetchData() {
             try {
-                let response = await fetch("http://localhost:8000/api/Labs/");
+                let response = await fetch("http://localhost:8000/api/user/lab/");
                 response = await response.json();
                 setDepartments(response);
             } catch (error) {
@@ -15,9 +16,9 @@ function Lablist() {
     }, []);
     return (
         <>
-            <div>
+            <Panel>
                 <h1 className="mt-10 mb-5 text-2xl font-semibold text-center">Labs list</h1>
-                <table className="doing" className="bg-gray-100 w-full max-w-6xl mx-auto text-center">
+                <table className="bg-gray-100 w-full max-w-6xl mx-auto text-center">
                     <thead>
                         <tr>
                             <th>Lab number</th>
@@ -37,7 +38,7 @@ function Lablist() {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </Panel>
         </>
     );
 }

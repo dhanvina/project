@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-
+import Panel from "../Panel";
 function PurchaseList() {
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
         async function fetchData() {
             try {
-                let response = await fetch("http://127.0.0.1:8000/api/PurchaseOrders/");
+                let response = await fetch("http://localhost:8000/api/user/purchase_order/");
                 response = await response.json();
                 setDepartments(response);
             } catch (error) {
@@ -16,7 +16,7 @@ function PurchaseList() {
     }, []);
     return (
         <>
-            <div>
+            <Panel>
                 <h1 className="mt-10 mb-5 text-2xl font-semibold text-center">Purchase List</h1>
                 <table className="doing" className="w-full max-w-6xl mx-auto text-center bg-gray-100">
                     <thead>
@@ -38,7 +38,7 @@ function PurchaseList() {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </Panel>
         </>
     );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Panel from "../Panel";
 function EquipmentsReviewList() {
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
@@ -15,7 +16,7 @@ function EquipmentsReviewList() {
     }, []);
     return (
         <>
-            <div>
+            <Panel>
                 <h1 className="mt-10 mb-5 text-2xl font-semibold text-center">Equipment Review List</h1>
                 <table className="bg-white border-collapse border border-slate-50 w-full max-w-6xl mx-auto text-center">
                     <thead>
@@ -41,7 +42,7 @@ function EquipmentsReviewList() {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </Panel>
         </>
     );
 }

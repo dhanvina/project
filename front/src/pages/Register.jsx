@@ -3,14 +3,14 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 function Register() {
     const [data, setData] = useState({
-        password: "1234",
-        confirm_password: "1234",
-        email: "mahi123@gmail.com",
-        lab_incharge: 1,
-        department: 1,
-        lab: 1,
+        password: "",
+        confirm_password: "",
+        email: "",
+        lab_incharge: null,
+        department: "",
+        lab: null,
     });
-    const { email, password, lab_number, confirm_password, department_number, lab_incharge } = data;
+    const { email, password, lab, confirm_password, department, lab_incharge } = data;
     function onChange(e) {
         setData((prev) => ({
             ...prev,
@@ -49,9 +49,9 @@ function Register() {
                 <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-center top-4 ">
                     <p className="text-3xl font-semibold text-center my-9">Lab Incharge Registration</p>
                     <div className="flex flex-col w-full max-w-md gap-8 ">
-                        <input onChange={onChange} required id="department_number" type="number" value={department_number} placeholder="Department Number" className="px-4 py-3 rounded-md" />
+                        <input onChange={onChange} required id="department" type="number" value={department} placeholder="Department Number" className="px-4 py-3 rounded-md" />
                         <input onChange={onChange} required id="lab_incharge" type="number" value={lab_incharge} placeholder="Lab Incharge Number" className="px-4 py-3 rounded-md" />
-                        <input onChange={onChange} required id="lab_number" type="number" value={lab_number} placeholder="department_number" className="px-4 py-3 rounded-md" />
+                        <input onChange={onChange} required id="lab" type="number" value={lab} placeholder="department_number" className="px-4 py-3 rounded-md" />
                         <input onChange={onChange} required id="email" type="email" value={email} placeholder="email" className="px-4 py-3 rounded-md" />
                         <input onChange={onChange} required id="password" type="password" value={password} placeholder="password" className="px-4 py-3 rounded-md" />
                         <input onChange={onChange} required id="confirm_password" type="password" value={confirm_password} placeholder="Cofirm Password" className="px-4 py-3 rounded-md" />
