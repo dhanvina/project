@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { setCred, logOut } from "../features/auth/userSlice";
-import { createContext } from "react";
+import axios from "../interceptors/axios";
+
 function Login() {
     const [data, setData] = useState({
         email: "",
@@ -20,25 +21,34 @@ function Login() {
     }
     async function onSubmit(e) {
         e.preventDefault();
-        let response = await fetch("http://127.0.0.1:8000/api/user/login/", {
-            headers: {
-                "Content-type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify(data),
-        });
-        let statusCode = response.status;
-        response = await response.json();
-        if (statusCode == 200) {
-            dispatch(setCred(response));
-            toast.success(`Logged Successful`);
+        try {
+            let response = await axios.post(
+                "http://localhost:8000/api/user/login/",
+                data,
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                },
 
-            navigate("/");
-        } else if (statusCode == 404) {
-            dispatch(logOut(response));
-            toast.dismiss();
-            toast.error("Email or Password is not Valid");
-            return;
+                { withCredentials: true }
+            );
+            console.log(response);
+            let statusCode = response.status;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${data["access"]}`;
+            if (statusCode == 200) {
+                dispatch(setCred(response.data));
+                toast.success(`Logged Successful`);
+
+                navigate("/");
+            } else if (statusCode == 404) {
+                dispatch(logOut(response));
+                toast.dismiss();
+                toast.error("Email or Password is not Valid");
+                return;
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

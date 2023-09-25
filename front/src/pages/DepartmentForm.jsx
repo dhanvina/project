@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../Components/Button";
+import axio from "../interceptors/axios";
 function DepartmentForm() {
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -20,11 +21,14 @@ function DepartmentForm() {
     async function onSubmit(e) {
         e.preventDefault();
         try {
-            await fetch("http://localhost:8000/api/Departments/", {
-                method: "POST",
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify(data),
-            });
+            let response = await axio.post(
+                "api/user/department/",
+                data,
+                {
+                    headers: { "Content-type": "application/json" },
+                },
+                { withCredentials: true }
+            );
             toast.success("Department Details Recorded");
             navigate("/");
         } catch (error) {

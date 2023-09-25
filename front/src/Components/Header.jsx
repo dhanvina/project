@@ -49,13 +49,6 @@ function Head() {
         <>
             {headerDisplay && (
                 <div className="sticky z-50 flex items-center justify-between w-full py-2 shadow-lg space-x-3 bg-slate-50">
-                    {location.pathname != "/" ? (
-                        <button type="button" className="fixed top-5 left-3" onClick={() => dispatch(openPanel())}>
-                            <AiOutlineMenuUnfold />
-                        </button>
-                    ) : (
-                        ""
-                    )}
                     <div className="flex font-semibold gap-16 ">
                         <img onClick={() => nav("/")} src={require("../img/GAT-logo.png")} alt="college logo" className="w-12 cursor-pointer ml-9 " />
                         <button className="px-3 hover:shadow-md rounded-md hover:bg-blue-400 hover:text-white transition ease-in-out" onClick={() => nav("/demo")}>

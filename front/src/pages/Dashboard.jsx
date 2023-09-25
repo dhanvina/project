@@ -12,16 +12,16 @@ import { RiComputerFill } from "react-icons/ri";
 function Dashboard() {
     const dispatch = useDispatch();
     const panelState = useSelector((store) => {
-        return store.sidePanel;
+        return store;
     });
 
     return (
         <div className="">
-            <button type="button" className="fixed top-3 left-2" onClick={() => dispatch(openPanel())}>
+            <button type="button" className="z-50 fixed top-5 left-2" onClick={() => dispatch(openPanel())}>
                 <AiOutlineMenuUnfold />
             </button>
 
-            <aside className={`w-64 h-screen transition-transform ${panelState.isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <aside className={`w-64 h-screen transition-transform ${panelState.sidePanel.isOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50">
                     <ul className="flex flex-col pl-1 items-start justify-center font-medium space-y-2">
                         <li>
