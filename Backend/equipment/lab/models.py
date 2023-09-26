@@ -68,38 +68,38 @@ class PurchaseOrder(models.Model):
     def __str__(self):
         return f"{self.purchase_order_number}, {self.purchase_date}"
 
-class LabInchargeRegister(models.Model):
-    lab_incharge = models.ForeignKey(LabInCharge, on_delete=models.CASCADE, default=1)
-    password = models.CharField(max_length=20)
-    confirm_password = models.CharField(max_length=20)
-    email = models.EmailField(unique=True)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
+# class LabInchargeRegister(models.Model):
+#     lab_incharge = models.ForeignKey(LabInCharge, on_delete=models.CASCADE, default=1)
+#     password = models.CharField(max_length=20)
+#     confirm_password = models.CharField(max_length=20)
+#     email = models.EmailField(unique=True)
+#     department = models.ForeignKey(Department, on_delete=models.CASCADE)
+#     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.lab_incharge}, {self.email}"
+#     def __str__(self):
+#         return f"{self.lab_incharge}, {self.email}"
     
 
-class LabInchargeLogin(models.Model):
-    email = models.ForeignKey(
-        LabInchargeRegister,
-        on_delete=models.CASCADE,
-        related_name='lab_incharge_login_emails'  
-    )
-    password = models.ForeignKey(
-        LabInchargeRegister,
-        on_delete=models.CASCADE,
-        related_name='lab_incharge_login_passwords' 
-    )
+# class LabInchargeLogin(models.Model):
+#     email = models.ForeignKey(
+#         LabInchargeRegister,
+#         on_delete=models.CASCADE,
+#         related_name='lab_incharge_login_emails'  
+#     )
+#     password = models.ForeignKey(
+#         LabInchargeRegister,
+#         on_delete=models.CASCADE,
+#         related_name='lab_incharge_login_passwords' 
+#     )
 
 
 
-    def __str__(self):
-        return f"{self.email}, {self.password}"
+#     def __str__(self):
+#         return f"{self.email}, {self.password}"
     
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, name, tc, password=None, password2=None):
+    def create_user(self, email, name, password=None, password2=None, role=None):
       """
       Creates and saves a User with the given email, name, tc and password.
       """
@@ -109,14 +109,15 @@ class UserManager(BaseUserManager):
       user = self.model(
           email=self.normalize_email(email),
           name=name,
-          tc=tc,
+        #   tc=tc,
+          role=role
       )
 
       user.set_password(password)
       user.save(using=self._db)
       return user
 
-    def create_superuser(self, email, name, tc, password=None):
+    def create_superuser(self, email, name, password=None,role=None):
       """
       Creates and saves a superuser with the given email, name, tc and password.
       """
@@ -124,7 +125,8 @@ class UserManager(BaseUserManager):
           email,
           password=password,
           name=name,
-          tc=tc,
+        #   tc=tc,
+          role=role,
       )
       user.is_admin = True
       user.save(using=self._db)
@@ -138,7 +140,8 @@ class User(AbstractBaseUser):
       unique=True,
   )
   name = models.CharField(max_length=200)
-  tc = models.BooleanField()
+#   tc = models.BooleanField()
+  role = models.CharField(max_length=10)
   is_active = models.BooleanField(default=True)
   is_admin = models.BooleanField(default=False)
   created_at = models.DateTimeField(auto_now_add=True)
@@ -147,7 +150,7 @@ class User(AbstractBaseUser):
   objects = UserManager()
 
   USERNAME_FIELD = 'email'
-  REQUIRED_FIELDS = ['name', 'tc']
+  REQUIRED_FIELDS = ['name', 'role']
 
   def __str__(self):
       return self.email

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Department, Lab, LabInCharge, Equipment, EquipmentIssue, EquipmentReview, PurchaseOrder,LabInchargeRegister,LabInchargeLogin
+from .models import Department, Lab, LabInCharge, Equipment, EquipmentIssue, EquipmentReview, PurchaseOrder
 from lab.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
@@ -7,11 +7,11 @@ class UserModelAdmin(BaseUserAdmin):
   # The fields to be used in displaying the User model.
   # These override the definitions on the base UserModelAdmin
   # that reference specific fields on auth.User.
-  list_display = ('id', 'email', 'name', 'tc', 'is_admin')
+  list_display = ('id', 'email', 'name', 'is_admin')
   list_filter = ('is_admin',)
   fieldsets = (
       ('User Credentials', {'fields': ('email', 'password')}),
-      ('Personal info', {'fields': ('name', 'tc')}),
+      ('Personal info', {'fields': ('name',)}),
       ('Permissions', {'fields': ('is_admin',)}),
   )
   # add_fieldsets is not a standard ModelAdmin attribute. UserModelAdmin
@@ -19,7 +19,7 @@ class UserModelAdmin(BaseUserAdmin):
   add_fieldsets = (
       (None, {
           'classes': ('wide',),
-          'fields': ('email', 'name', 'tc', 'password1', 'password2'),
+          'fields': ('email', 'name', 'password1', 'password2'),
       }),
   )
   search_fields = ('email',)
@@ -63,10 +63,10 @@ class EquipmentReviewAdmin(admin.ModelAdmin):
 class PurchaseOrderAdmin(admin.ModelAdmin):
     list_display = ('purchase_order_number', 'purchase_date', 'supplier', 'total_value')
 
-@admin.register(LabInchargeRegister)
-class LabInchargeRegisterAdmin(admin.ModelAdmin):
-    list_display = ('lab_incharge', 'password', 'confirm_password', 'email','department','lab')
+# @admin.register(LabInchargeRegister)
+# class LabInchargeRegisterAdmin(admin.ModelAdmin):
+#     list_display = ('lab_incharge', 'password', 'confirm_password', 'email','department','lab')
 
-@admin.register(LabInchargeLogin)
-class LabInchargeLoginAdmin(admin.ModelAdmin):
-    list_display = ('email', 'password')
+# @admin.register(LabInchargeLogin)
+# class LabInchargeLoginAdmin(admin.ModelAdmin):
+#     list_display = ('email', 'password')

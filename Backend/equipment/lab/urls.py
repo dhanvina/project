@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import DepartmentViewSet, LabViewSet, PurchaseOrderViewSet, EquipmentViewSet, EquipmentIssueViewSet, EquipmentReviewViewSet, LabInChargeViewSet, LabInchargeRegisterViewSet, LabInchargeLoginViewSet
+from .views import DepartmentViewSet, LabViewSet, PurchaseOrderViewSet, EquipmentViewSet, EquipmentIssueViewSet, EquipmentReviewViewSet, LabInChargeViewSet
 from lab.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView
 from rest_framework_simplejwt import views as jwt_views
 
@@ -13,9 +13,9 @@ router.register(r'equipment', EquipmentViewSet)
 router.register(r'equipment_issue', EquipmentIssueViewSet)
 router.register(r'equipment_review', EquipmentReviewViewSet)
 router.register(r'labincharge', LabInChargeViewSet)
-# router.register(r'Login_api', Login_api)
-router.register(r'LabInchargeRegister', LabInchargeRegisterViewSet)
-router.register(r'LabInchargeLogin', LabInchargeLoginViewSet)
+# # router.register(r'Login_api', Login_api)
+# router.register(r'LabInchargeRegister', LabInchargeRegisterViewSet)
+# router.register(r'LabInchargeLogin', LabInchargeLoginViewSet)
 
 
 urlpatterns = [

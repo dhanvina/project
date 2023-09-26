@@ -11,9 +11,9 @@ router.register(r'PurchaseOrders', views.PurchaseOrderViewSet, basename='Purchas
 router.register(r'Equipments', views.EquipmentViewSet, basename='Equipment')
 router.register(r'EquipmentIssues', views.EquipmentIssueViewSet, basename='EquipmentIssue')
 router.register(r'equipment_review', views.EquipmentReviewViewSet, basename='equipment_review')
-router.register(r'labincharge', views.LabInChargeViewSet, basename='LabIncharge')
-router.register(r'LabInchargeRegister', views.LabInchargeRegisterViewSet, basename='LabInchargeRegister')
-router.register(r'LabInchargeLogin', views.LabInchargeLoginViewSet, basename='LabInchargeLogin')
+# router.register(r'labincharge', views.LabInChargeViewSet, basename='LabIncharge')
+# router.register(r'LabInchargeRegister', views.LabInchargeRegisterViewSet, basename='LabInchargeRegister')
+# router.register(r'LabInchargeLogin', views.LabInchargeLoginViewSet, basename='LabInchargeLogin')
 
 
 urlpatterns = [

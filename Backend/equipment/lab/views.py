@@ -1,6 +1,6 @@
-from .serializers import DepartmentSerializer, LabSerializer, PurchaseOrderSerializer, EquipmentSerializer, EquipmentIssueSerializer, LabInChargeSerializer, EquipmentReviewSerializer, LabInchargeRegisterSerializer, LabInchargeLoginSerializer
+from .serializers import DepartmentSerializer, LabSerializer, PurchaseOrderSerializer, EquipmentSerializer, EquipmentIssueSerializer, LabInChargeSerializer, EquipmentReviewSerializer
 from rest_framework import viewsets
-from .models import Department, Lab, PurchaseOrder, Equipment, EquipmentIssue, EquipmentReview, LabInCharge, LabInchargeRegister, LabInchargeLogin
+from .models import Department, Lab, PurchaseOrder, Equipment, EquipmentIssue, EquipmentReview, LabInCharge
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -54,14 +54,14 @@ class LabInChargeViewSet(viewsets.ModelViewSet):
     queryset = LabInCharge.objects.all()
 
 
-class LabInchargeRegisterViewSet(viewsets.ModelViewSet):
-    serializer_class = LabInchargeRegisterSerializer
-    queryset = LabInchargeRegister.objects.all()
+# class LabInchargeRegisterViewSet(viewsets.ModelViewSet):
+#     serializer_class = LabInchargeRegisterSerializer
+#     queryset = LabInchargeRegister.objects.all()
 
 
-class LabInchargeLoginViewSet(viewsets.ModelViewSet):
-    serializer_class = LabInchargeLoginSerializer
-    queryset = LabInchargeLogin.objects.all()
+# class LabInchargeLoginViewSet(viewsets.ModelViewSet):
+#     serializer_class = LabInchargeLoginSerializer
+#     queryset = LabInchargeLogin.objects.all()
 
 
 def get_tokens_for_user(user):
@@ -78,7 +78,7 @@ class UserRegistrationView(APIView):
     serializer.is_valid(raise_exception=True)
     user = serializer.save()
     token = get_tokens_for_user(user)
-    return Response({'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
+    return Response({ 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
 
 class UserLoginView(APIView):
   renderer_classes = [UserRenderer]
@@ -89,8 +89,9 @@ class UserLoginView(APIView):
     password = serializer.data.get('password')
     user = authenticate(email=email, password=password)
     if user is not None:
+      role = user.role 
       token = get_tokens_for_user(user)
-      return Response({'token':token, 'msg':'Login Success'}, status=status.HTTP_200_OK)
+      return Response({'token':token,'role':role, 'msg':'Login Success'}, status=status.HTTP_200_OK)
     else:
       return Response({'errors':{'non_field_errors':['Email or Password is not Valid']}}, status=status.HTTP_404_NOT_FOUND)
 

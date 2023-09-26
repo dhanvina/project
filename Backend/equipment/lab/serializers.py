@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Department, Lab, PurchaseOrder, Equipment, EquipmentIssue, EquipmentReview, LabInCharge,LabInchargeRegister, LabInchargeLogin
+from .models import Department, Lab, PurchaseOrder, Equipment, EquipmentIssue, EquipmentReview, LabInCharge
 from rest_framework import serializers
 
 
@@ -46,23 +46,23 @@ class LabInChargeSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
-class LabInchargeRegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LabInchargeRegister
-        fields = '__all__'
+# class LabInchargeRegisterSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = LabInchargeRegister
+#         fields = '__all__'
 
 
-class LabInchargeLoginSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LabInchargeLogin
-        fields = '__all__'
+# class LabInchargeLoginSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = LabInchargeLogin
+#         fields = '__all__'
         
 class UserRegistrationSerializer(serializers.ModelSerializer):
       # We are writing this becoz we need confirm password field in our Registratin Request
   password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
   class Meta:
     model = User
-    fields=['email', 'name', 'password', 'password2', 'tc']
+    fields=['email', 'name', 'password', 'password2','role']
     extra_kwargs={
       'password':{'write_only':True}
     }
