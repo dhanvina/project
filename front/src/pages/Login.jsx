@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { setCred, logOut } from "../features/auth/userSlice";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Login() {
     const [data, setData] = useState({
@@ -22,19 +23,12 @@ function Login() {
     async function onSubmit(e) {
         e.preventDefault();
         try {
-            let response = await axios.post(
-                "http://localhost:8000/api/user/login/",
-                data,
-                {
-                    headers: {
-                        "Content-type": "application/json",
-                    },
+            let response = await axios.post("http://localhost:8000/api/user/login/", data, {
+                headers: {
+                    "Content-type": "application/json",
                 },
-
-                { withCredentials: true }
-            );
+            });
             let statusCode = response.status;
-            axios.defaults.headers.common["Authorization"] = `Bearer ${data["access"]}`;
             if (statusCode == 200) {
                 dispatch(setCred(response.data));
                 toast.success(`Logged Successful`);
@@ -60,6 +54,12 @@ function Login() {
                         <input onChange={onChange} required id="email" type="email" value={email} placeholder="email" className="px-4 py-3 rounded-md" />
                         <input onChange={onChange} required id="password" type="password" value={password} placeholder="password" className="px-4 py-3 rounded-md" />
                         <button className="px-8 py-2 text-white bg-blue-600 hover:bg-blue-700 transition ease-in-out rounded-md ">Login </button>
+                    </div>
+                    <div className="mt-3 text-sm">
+                        Register An Account -{" "}
+                        <span className="text-red-600 cursor-pointer">
+                            <Link to="/register">Register</Link>
+                        </span>
                     </div>
                 </div>
             </form>
