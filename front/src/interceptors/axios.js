@@ -7,20 +7,17 @@ const axiosInstance = axios.create({
     baseURL: "http://localhost:8000/",
 });
 
-const state = store.getState().user;
-
 axiosInstance.interceptors.response.use(
     (resp) => resp,
     async (error) => {
-        console.log("sending the request");
+        const state = store.getState().user;
         if (error.response.status === 401 && !refresh) {
             refresh = true;
 
-            console.log(localStorage.getItem("persist:root"));
             const response = await axiosInstance.post(
-                "http://127.0.0.1:8000/api/user/token/refresh/",
+                "api/user/token/refresh/",
                 {
-                    refresh: state?.token?.refresh,
+                    refresh: state?.refreshtoken,
                 },
                 {
                     headers: {
@@ -32,7 +29,12 @@ axiosInstance.interceptors.response.use(
 
             if (response.status === 200) {
                 axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${response.data["access"]}`;
-                store.dispatch(setCred(response));
+                store.dispatch(
+                    setCred({
+                        response: response.data,
+                        name: "refreshedToken",
+                    })
+                );
                 return axiosInstance(error.config);
             }
         }

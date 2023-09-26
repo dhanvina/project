@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { setCred, logOut } from "../features/auth/userSlice";
-import axios from "../interceptors/axios";
+import axios from "axios";
 
 function Login() {
     const [data, setData] = useState({
@@ -33,7 +33,6 @@ function Login() {
 
                 { withCredentials: true }
             );
-            console.log(response);
             let statusCode = response.status;
             axios.defaults.headers.common["Authorization"] = `Bearer ${data["access"]}`;
             if (statusCode == 200) {

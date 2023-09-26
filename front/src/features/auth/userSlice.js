@@ -2,17 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     role: null,
-    token: null,
+    accesstoken: null,
     status: null,
+    refreshtoken: null,
 };
 const authSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
         setCred: (state, action) => {
-            console.log(action.payload);
             state.status = true;
-            state.token = action.payload.token;
+            if (action.payload?.name == "refreshedToken") {
+                state.accesstoken = action.payload.response.access;
+            } else {
+                state.accesstoken = action.payload.token?.access;
+            }
+            if (action.payload?.name != "refreshedToken") {
+                state.refreshtoken = action.payload.token?.refresh;
+            }
         },
         logOut: (state, action) => {
             state.role = null;
