@@ -11,60 +11,70 @@ import { BiSearchAlt, BiSolidPurchaseTag } from "react-icons/bi";
 import { RiComputerFill } from "react-icons/ri";
 function Dashboard() {
     const dispatch = useDispatch();
-    const panelState = useSelector((store) => {
+    const store = useSelector((store) => {
         return store;
     });
 
     return (
         <div className="">
-            <button type="button" className="z-50 fixed top-5 left-2" onClick={() => dispatch(openPanel())}>
+            <button type="button" className="fixed z-50 top-5 left-2" onClick={() => dispatch(openPanel())}>
                 <AiOutlineMenuUnfold />
             </button>
 
-            <aside className={`w-64 h-screen transition-transform ${panelState.sidePanel.isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <aside className={`w-64 h-screen transition-transform ${store.sidePanel.isOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50">
-                    <ul className="flex flex-col pl-1 items-start justify-center font-medium space-y-2">
-                        <li>
-                            <span className="flex items-center justify-start text-lg font-semibold space-x-2">
-                                <MdSpaceDashboard />
-                                <p> Dashboard </p>
-                            </span>
-                        </li>
-                        <li>
-                            <Link to="/demo" className="flex items-center justify-center space-x-2">
-                                <FcDepartment />
-                                <span>Department List</span>{" "}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/lablist" className="flex items-center justify-center space-x-2">
-                                <ImLab /> <span>Labs List</span>{" "}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/issueslist" className="flex justify-center items-center space-x-2">
-                                <AiOutlineIssuesClose /> <span>Issues List</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/purchaselist" className="flex justify-center items-center space-x-2">
-                                <BiSolidPurchaseTag />
-                                <span> Purchase order List</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/equipmentlist" className="flex justify-center items-center space-x-2">
-                                <RiComputerFill />
-                                <span>Equipment List</span>{" "}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/equipmentreviewlist" className="flex justify-center items-center space-x-2">
-                                <BiSearchAlt />
-                                <span> Equipment Review List</span>
-                            </Link>
-                        </li>
-                    </ul>
+                    {store.user.role == "Admin" ? (
+                        <ul className="flex flex-col items-start justify-center pl-1 font-medium space-y-2">
+                            <li>
+                                <span className="flex items-center justify-start text-lg font-semibold space-x-2">
+                                    <MdSpaceDashboard />
+                                    <p> Dashboard </p>
+                                </span>
+                            </li>
+                            <li>
+                                <Link to="/departmentlist" className="flex items-center justify-center space-x-2">
+                                    <FcDepartment />
+                                    <span>Department List</span>{" "}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/lablist" className="flex items-center justify-center space-x-2">
+                                    <ImLab /> <span>Labs List</span>{" "}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/purchaselist" className="flex items-center justify-center space-x-2">
+                                    <BiSolidPurchaseTag />
+                                    <span> Purchase order List</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/equipmentlist" className="flex items-center justify-center space-x-2">
+                                    <RiComputerFill />
+                                    <span>Equipment List</span>{" "}
+                                </Link>
+                            </li>
+                        </ul>
+                    ) : (
+                        ""
+                    )}
+                    {store.user.role == "Staff" ? (
+                        <ul className="flex flex-col items-start justify-center pl-1 font-medium space-y-2">
+                            <li>
+                                <Link to="/equipmentreviewlist" className="flex items-center justify-center space-x-2">
+                                    <BiSearchAlt />
+                                    <span> Equipment Review List</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/issueslist" className="flex items-center justify-center space-x-2">
+                                    <AiOutlineIssuesClose /> <span>Issues List</span>
+                                </Link>
+                            </li>
+                        </ul>
+                    ) : (
+                        ""
+                    )}
                 </div>
             </aside>
         </div>

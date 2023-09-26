@@ -5,17 +5,20 @@ const initialState = {
     accesstoken: null,
     status: null,
     refreshtoken: null,
+    userInfo: null,
 };
 const authSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
         setCred: (state, action) => {
-            state.status = true;
             if (action.payload?.name == "refreshedToken") {
                 state.accesstoken = action.payload.response.access;
             } else {
                 state.accesstoken = action.payload.token?.access;
+                state.role = action.payload?.role;
+                state.status = true;
+                state.userInfo = action.payload.data;
             }
             if (action.payload?.name != "refreshedToken") {
                 state.refreshtoken = action.payload.token?.refresh;
@@ -23,8 +26,9 @@ const authSlice = createSlice({
         },
         logOut: (state, action) => {
             state.role = null;
-            state.token = null;
             state.status = false;
+            state.refreshtoken = null;
+            state.accesstoken = null;
         },
     },
 });

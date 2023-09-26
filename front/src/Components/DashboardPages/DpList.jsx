@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import jsPDFInvoiceTemplate, { OutputType, jsPDF } from "jspdf-invoice-template";
-import Dashboard from "../../pages/Dashboard";
 import { useSelector } from "react-redux";
 import axios from "../../interceptors/axios";
 import Panel from "../Panel";
@@ -26,6 +25,7 @@ function DepartmentList() {
         const [...boom] = departments;
 
         let props = {
+            outputType: OutputType.Save,
             returnJsPDFDocObject: true,
             fileName: "Invoice",
             orientationLandscape: false,
@@ -99,7 +99,7 @@ function DepartmentList() {
             )}
             {departments != null && departments.length != 0 ? (
                 <div className="flex justify-center">
-                    <button type="button" className="px-2 py-1 my-3 text-white bg-blue-500 hover:bg-blue-600 hover:shadow-md rounded-md " onClick={() => saveFile()}>
+                    <button className="cursor-pointer px-2 py-1 my-3 text-white bg-blue-500 hover:bg-blue-600 hover:shadow-md rounded-md " onClick={() => saveFile()}>
                         Print
                     </button>
                 </div>
